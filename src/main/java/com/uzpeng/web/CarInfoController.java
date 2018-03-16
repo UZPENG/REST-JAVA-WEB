@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,16 +42,10 @@ public class CarInfoController {
         this.handleErrorService = handleErrorService;
     }
 
-    @RequestMapping(value = "/crawl/car")
+    @RequestMapping(value = "/crawl/car",method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getCarInfo(HttpServletResponse response, HttpServletRequest request){
-        if(!HttpUtil.checkMethod(request, HttpUtil.GET)){
-            return handleErrorService.handleError("NOT FOUND");
-        }
-
         logService.insertLog(HttpUtil.getIpAddress(request));
-        response.setCharacterEncoding("utf-8");
-        response.setHeader("Content-Type","application/json");
 
         String offset = request.getParameter("offset");
         String limit = request.getParameter("limit");
@@ -77,13 +72,9 @@ public class CarInfoController {
         }
     }
 
-    @RequestMapping(value = "/")
+    @RequestMapping(value = "/", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getModuleList(HttpServletResponse response, HttpServletRequest request){
-        if(!HttpUtil.checkMethod(request, HttpUtil.GET)){
-            return  handleErrorService.handleError("NOT FOUND");
-        }
-
         String configFileName = "module-list.json";
         try{
             JSONObject responseJson = ConfigUtil.readJsonConf(configFileName);
@@ -94,12 +85,9 @@ public class CarInfoController {
         }
     }
 
-    @RequestMapping(value = "/crawl")
+    @RequestMapping(value = "/crawl", method = RequestMethod.GET, produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getApiList(HttpServletResponse response, HttpServletRequest request){
-        if(!HttpUtil.checkMethod(request, HttpUtil.GET)){
-            return  handleErrorService.handleError("NOT FOUND");
-        }
 
         String configFileName =  "api-list.json";
         try{

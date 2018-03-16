@@ -5,11 +5,13 @@ import com.google.gson.GsonBuilder;
 import com.uzpeng.dao.CarInfoDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author serverliu on 2018/2/26.
  */
 @Service
+@Transactional
 public class CarInfoService {
     @Autowired
     private CarInfoDao carInfoDao;

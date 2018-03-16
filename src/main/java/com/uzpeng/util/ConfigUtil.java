@@ -13,6 +13,13 @@ import java.io.InputStreamReader;
  */
 public class ConfigUtil {
 
+    /**
+     *
+     * @param name 指定配置文件的文件名
+     * @return 配置文件的对应的JSON对象
+     * @throws JSONException json文件格式错误
+     * @throws IOException 读写文件错误
+     */
     public static JSONObject readJsonConf(String name) throws JSONException,IOException{
         ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
         InputStream moduleApiListInputStream = classLoader.getResourceAsStream(name);

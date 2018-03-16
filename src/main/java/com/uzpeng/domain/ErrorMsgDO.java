@@ -5,7 +5,7 @@ package com.uzpeng.domain;
  */
 public class ErrorMsgDO {
     private String msg;
-    private final String documentations_url = "";
+    private final String documentations_url = "https://github.com/UZPENG/REST-JAVA-WEB/wiki/Documentions";
 
     public String getMsg() {
         return msg;

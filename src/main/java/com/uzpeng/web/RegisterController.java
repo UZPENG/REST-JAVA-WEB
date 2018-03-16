@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,7 +19,7 @@ public class RegisterController {
 
     private final static String KEY_EMAIL = "email";
 
-    @RequestMapping("/register")
+    @RequestMapping(value = "/register")
     public void register(HttpServletRequest request, HttpServletResponse response){
         String specifyMethod = "POST";
         if(!request.getMethod().equals(specifyMethod)){
@@ -30,14 +31,14 @@ public class RegisterController {
         if (emailStatus){
             return;
         }
-//        Cookie[] cookies = request.getCookies();
-//        boolean isEmailValid = false;
-//        for (Cookie cookie : cookies){
-//            if(cookie.getName().equals("JSESSIONID")){
-//                isEmailValid = true;
-//                break;
-//            }
-//        }
+        Cookie[] cookies = request.getCookies();
+        boolean isEmailValid = false;
+        for (Cookie cookie : cookies){
+            if(cookie.getName().equals("JSESSIONID")){
+                isEmailValid = true;
+                break;
+            }
+        }
         registerService.sendRegisterEmail(email);
     }
 }
